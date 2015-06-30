@@ -180,6 +180,8 @@ public class TodoListFragment extends Fragment {
         View v = layoutInflater.inflate(R.layout.dialog_new_todo, null);
         final EditText titleEditText = (EditText) v.findViewById(R.id.titleEditText);
         final EditText bodyEditText = (EditText) v.findViewById(R.id.bodyEditText);
+        titleEditText.setText(todoItem.getTitle());
+        bodyEditText.setText(todoItem.getBody());
 
         new AlertDialog.Builder(getActivity())
                 .setTitle(getActivity().getResources().getString(R.string.todo_edit))

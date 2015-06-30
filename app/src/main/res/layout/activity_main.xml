@@ -39,6 +39,15 @@
             app:fab_icon="@drawable/ic_create_white_18dp"
             app:fab_title="@string/todo.add.newItem"/>
 
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/partyFAB"
+            android:layout_width="@dimen/fab_size_mini"
+            android:layout_height="@dimen/fab_size_mini"
+            app:fab_size="mini"
+            app:fab_colorNormal="@color/accent"
+            app:fab_icon="@drawable/ic_cake_white_18dp"
+            app:fab_title="@string/party"/>
+
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 </android.support.design.widget.CoordinatorLayout>

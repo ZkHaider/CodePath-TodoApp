@@ -8,7 +8,8 @@
     <dimen name="fab_label_width">156dp</dimen>
     <dimen name="todo_card_title_margin">16dp</dimen>
     <dimen name="todo_card_date_margin">16dp</dimen>
-    <dimen name="todo_card_title_margin_right">96dp</dimen>
+    <dimen name="todo_card_title_margin_right">120dp</dimen>
     <dimen name="todo_card_body_margin_top">16dp</dimen>
     <dimen name="dialog_title_margin">24dp</dimen>
+    <dimen name="todo_item_date_text_size">12sp</dimen>
 </resources>

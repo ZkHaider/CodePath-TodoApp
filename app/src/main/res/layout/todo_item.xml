@@ -45,6 +45,7 @@
         <TextView
             android:id="@+id/todoDate"
             android:textColor="@color/white"
+            android:textSize="@dimen/todo_item_date_text_size"
             android:layout_margin="@dimen/todo_card_date_margin"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"

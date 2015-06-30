@@ -13,6 +13,8 @@
     <string name="todo.edit">Edit Todo</string>
     <string name="todo.update">Update</string>
 
+    <string name="party">Caturday</string>
+
     <string name="no_todo_items">No Todo Items</string>
     <string name="todo.description">Description</string>
 </resources>
