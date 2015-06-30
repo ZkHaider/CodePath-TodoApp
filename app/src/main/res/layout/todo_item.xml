@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/todoCardView"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:layout_margin="@dimen/activity_horizontal_margin"
+    app:cardCornerRadius="@dimen/cardview_corner_radius" >
+
+    <RelativeLayout
+        android:id="@+id/todoItemLayout"
+        android:background="@color/cyan_700"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <TextView
+            android:id="@+id/todoTitle"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/todo_card_title_margin"
+            android:layout_marginLeft="@dimen/todo_card_title_margin"
+            android:layout_marginRight="@dimen/todo_card_title_margin_right"
+            android:layout_alignParentLeft="true"
+            android:scrollHorizontally="true"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/todoBody"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/todo_card_body_margin_top"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:scrollHorizontally="true"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:layout_below="@id/todoTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/todoDate"
+            android:textColor="@color/white"
+            android:layout_margin="@dimen/todo_card_date_margin"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/todoCompletionDate"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

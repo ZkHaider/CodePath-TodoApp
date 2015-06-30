@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Todo Item List</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="todo.add.newItem">New Todo Item</string>
+    <string name="todo.title">Enter title</string>
+    <string name="todo.item.created">Todo Item Created</string>
+    <string name="todo.empty">Cannot be empty</string>
+    <string name="todo.error">Oops something went wrong</string>
+    <string name="todo.save">Save</string>
+    <string name="todo.add">Add</string>
+    <string name="todo.remove">Remove Item?</string>
+    <string name="todo.edit">Edit Todo</string>
+    <string name="todo.update">Update</string>
+
+    <string name="no_todo_items">No Todo Items</string>
+    <string name="todo.description">Description</string>
+</resources>

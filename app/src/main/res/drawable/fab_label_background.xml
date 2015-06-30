@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+       android:shape="rectangle" >
+
+    <padding android:left="@dimen/starter_margin" android:right="@dimen/starter_margin" />
+    <size android:height="@dimen/fab_label_height" android:width="@dimen/fab_label_width" />
+    <corners android:radius="@dimen/cardview_corner_radius" />
+    <solid android:color="@color/secondary_text_default_material_light" />
+
+</shape>
