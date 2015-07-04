@@ -39,7 +39,9 @@ import com.todocodepathapp.models.TodoItem;
 import java.util.Date;
 import java.util.List;
 
-
+/**
+ * Created by ZkHaider on 6/29/15.
+ */
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
