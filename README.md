@@ -51,6 +51,8 @@ Here's a walkthrough of implemented user stories:
 
 <a href="http://i.giflike.com/embed/Tl4An6W"><img src="http://i.giflike.com/Tl4An6W.gif"/></a>
 
+<a href="http://i.giflike.com/embed/yhuVqpR"><img src="http://i.giflike.com/yhuVqpR.gif"/></a>
+
 #### Todo Cancel Remove Swipe
 
 <a href="http://i.giflike.com/embed/1sJOdtg"><img src="http://i.giflike.com/1sJOdtg.gif"/></a>
