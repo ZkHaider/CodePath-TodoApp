@@ -27,6 +27,7 @@ The following **additional** features are implemented:
 
 * [X] Super secret Caturday party viewpager utilizing The Cat API.
 * [X] Use of Android's Palette Library for Vibrant Colors.
+* [X] Uses TextInputLayout from Google's new design support library.
 * [X] API Integration using Retrofit and SimpleXMLConverter.
 * [X] Event-Bus system integration for better architecture.
 * [X] TimeStamp Util class that displays time as "X minutes ago", "X hours ago", "X days ago", etc.
