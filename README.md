@@ -72,6 +72,8 @@ Here's a walkthrough of implemented user stories:
 
 <a href="http://i.giflike.com/embed/4i1aCb6"><img src="http://i.giflike.com/4i1aCb6.gif"/></a>
 
+<a href="http://i.giflike.com/embed/iskJQdo"><img src="http://i.giflike.com/iskJQdo.gif"/></a>
+
 ## Notes
 
 The biggest challenge for this application was probably working with Cursors and SQLiteOpenHelper class, and persisting a Object Relational Map class. Those things probably took the longest amount of time to figure out. The next difficult thing was probably Fragment management, there is only one activity in this application and three different fragments that are managed.
