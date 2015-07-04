@@ -18,7 +18,7 @@ import com.todocodepathapp.R;
 import com.todocodepathapp.adapters.TodoItemAdapter;
 import com.todocodepathapp.eventbus.BusProvider;
 import com.todocodepathapp.eventbus.events.DeleteTodoItemEvent;
-import com.todocodepathapp.eventbus.events.RemoveFragment;
+import com.todocodepathapp.eventbus.events.RemoveFragmentEvent;
 import com.todocodepathapp.eventbus.events.UpdateTodoItemEvent;
 import com.todocodepathapp.models.TodoItem;
 
@@ -133,7 +133,7 @@ public class TodoListFragment extends Fragment {
         mTodoItemAdapter.removeItem(adapterPosition);
         mTodoItemAdapter.notifyDataSetChanged();
         if (mTodoItemAdapter.getItemCount() == 0)
-            BusProvider.getInstance().post(new RemoveFragment());
+            BusProvider.getInstance().post(new RemoveFragmentEvent());
     }
 
     private void initItemTouchListener() {

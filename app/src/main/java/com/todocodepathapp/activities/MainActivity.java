@@ -1,5 +1,6 @@
 package com.todocodepathapp.activities;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -20,13 +21,17 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 import com.todocodepathapp.R;
+import com.todocodepathapp.api.models.Image;
 import com.todocodepathapp.eventbus.BusProvider;
 import com.todocodepathapp.eventbus.events.GetTodoItemsEvent;
 import com.todocodepathapp.eventbus.events.InsertTodoItemEvent;
+import com.todocodepathapp.eventbus.events.LoadCatImages;
+import com.todocodepathapp.eventbus.events.LoadedCatImages;
 import com.todocodepathapp.eventbus.events.NewTodoItemEvent;
-import com.todocodepathapp.eventbus.events.RemoveFragment;
+import com.todocodepathapp.eventbus.events.RemoveFragmentEvent;
 import com.todocodepathapp.eventbus.events.SendUpdatedTodoEvent;
 import com.todocodepathapp.eventbus.events.TodoItemsEvent;
+import com.todocodepathapp.fragments.CaturdayFragment;
 import com.todocodepathapp.fragments.EmptyContentFragment;
 import com.todocodepathapp.fragments.TodoListFragment;
 import com.todocodepathapp.models.TodoItem;
@@ -44,13 +49,15 @@ public class MainActivity extends AppCompatActivity {
     private CoordinatorLayout mCoordinatorLayout;
     private FloatingActionsMenu mFloatingActionMenu;
     private FloatingActionButton mCreateFabFAB;
+    private FloatingActionButton mCaturdayFAB;
+    private ProgressDialog mProgressDialog;
 
     private EmptyContentFragment mEmptyContentFragment;
     private TodoListFragment mTodoListFragment;
 
-    /***
+    /********************************************************************************************
      *  LifeCycle Methods
-     */
+     ********************************************************************************************/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initViews();
         initFABListener();
+
     }
 
     @Override
@@ -95,15 +103,16 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /***
+    /********************************************************************************************
      * Initialization Methods
-     */
+     ********************************************************************************************/
 
     private void initViews() {
         mResources = getResources();
         mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         mFloatingActionMenu = (FloatingActionsMenu) findViewById(R.id.todoFAB);
         mCreateFabFAB = (FloatingActionButton) findViewById(R.id.newTodoFAB);
+        mCaturdayFAB = (FloatingActionButton) findViewById(R.id.partyFAB);
     }
 
     private void initFABListener() {
@@ -111,6 +120,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 newTodoDialog();
+            }
+        });
+        mCaturdayFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBus.post(new LoadCatImages());
+                mFloatingActionMenu.collapse();
+                startProgressDialog();
             }
         });
     }
@@ -123,9 +140,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /***
+    /********************************************************************************************
      *  Otto Subscription Methods
-     */
+     ********************************************************************************************/
 
     @Subscribe
     public void onTodoItemsEvent(TodoItemsEvent todoItemsEvent) {
@@ -154,13 +171,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Subscribe
-    public void onRemoveFragment(RemoveFragment removeFragment) {
+    public void onRemoveFragment(RemoveFragmentEvent removeFragmentEvent) {
         replaceWithEmptyContentFragment(getSupportFragmentManager().beginTransaction());
     }
 
-    /***
+    @Subscribe
+    public void onLoadedCatImages(LoadedCatImages loadedCatImages) {
+        stopProgressDialog();
+        List<Image> images = loadedCatImages.getImages();
+        CaturdayFragment caturdayFragment = new CaturdayFragment();
+        caturdayFragment.setImages(images);
+        caturdayFragment.setFragmentManager(getSupportFragmentManager());
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom,
+                        R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom)
+                .addToBackStack(null)
+                .add(R.id.todoContent, caturdayFragment)
+                .commit();
+    }
+
+    /********************************************************************************************
      *  Helper Methods
-     */
+     ********************************************************************************************/
 
     public void newTodoDialog() {
         LayoutInflater layoutInflater = MainActivity.this.getLayoutInflater();
@@ -228,6 +260,17 @@ public class MainActivity extends AppCompatActivity {
         mEmptyContentFragment = EmptyContentFragment.getInstance();
         ft.replace(R.id.todoContent, mEmptyContentFragment);
         ft.commit();
+    }
+
+    private void startProgressDialog() {
+        mProgressDialog = new ProgressDialog(MainActivity.this);
+        mProgressDialog.setMessage("Caturday Initializing...");
+        mProgressDialog.setCancelable(true);
+        mProgressDialog.show();
+    }
+
+    private void stopProgressDialog() {
+        mProgressDialog.dismiss();
     }
 
 }
