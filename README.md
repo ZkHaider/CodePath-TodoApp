@@ -57,6 +57,10 @@ Here's a walkthrough of implemented user stories:
 
 <a href="http://i.giflike.com/embed/1sJOdtg"><img src="http://i.giflike.com/1sJOdtg.gif"/></a>
 
+#### Todo Update
+
+<a href="http://i.giflike.com/embed/nAx4iB8"><img src="http://i.giflike.com/nAx4iB8.gif"/></a>
+
 #### Todo Persistence 
 
 <a href="http://i.giflike.com/embed/JKQhZRa"><img src="http://i.giflike.com/JKQhZRa.gif"/></a>
