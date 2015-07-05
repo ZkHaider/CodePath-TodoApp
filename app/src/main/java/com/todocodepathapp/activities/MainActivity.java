@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -105,6 +106,13 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (mFloatingActionMenu.getVisibility() == View.INVISIBLE)
+            mFloatingActionMenu.setVisibility(View.VISIBLE);
+    }
+
     /********************************************************************************************
      * Initialization Methods
      ********************************************************************************************/
@@ -181,15 +189,7 @@ public class MainActivity extends AppCompatActivity {
     public void onLoadedCatImages(LoadedCatImages loadedCatImages) {
         stopProgressDialog();
         List<Image> images = loadedCatImages.getImages();
-        CaturdayFragment caturdayFragment = new CaturdayFragment();
-        caturdayFragment.setImages(images);
-        caturdayFragment.setFragmentManager(getSupportFragmentManager());
-        getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom,
-                        R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom)
-                .addToBackStack(null)
-                .add(R.id.todoContent, caturdayFragment)
-                .commit();
+        loadCaturday(images);
     }
 
     /********************************************************************************************
@@ -207,11 +207,11 @@ public class MainActivity extends AppCompatActivity {
                 .setView(v)
                 .setPositiveButton(mResources.getString(R.string.todo_add),
                         new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        insertTodoItem(titleEditText, bodyEditText);
-                    }
-                })
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                insertTodoItem(titleEditText, bodyEditText);
+                            }
+                        })
                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -254,15 +254,32 @@ public class MainActivity extends AppCompatActivity {
     private void replaceWithTodoListFragment(List<TodoItem> todoItems, FragmentTransaction ft) {
         mTodoListFragment = TodoListFragment.getTodoListFragment();
         mTodoListFragment.setTodoItems(todoItems);
-        ft.replace(R.id.todoContent, mTodoListFragment);
+        ft.replace(R.id.todoContent, mTodoListFragment, Integer.toString(getFragmentCount()));
         ft.commit();
     }
 
     private void replaceWithEmptyContentFragment(FragmentTransaction ft) {
         mEmptyContentFragment = EmptyContentFragment.getInstance();
-        ft.replace(R.id.todoContent, mEmptyContentFragment);
+        ft.replace(R.id.todoContent, mEmptyContentFragment, Integer.toString(getFragmentCount()));
         ft.commit();
     }
+
+    private void loadCaturday(List<Image> images) {
+        CaturdayFragment caturdayFragment = new CaturdayFragment();
+        caturdayFragment.setImages(images);
+        caturdayFragment.setFragmentManager(getSupportFragmentManager());
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom,
+                        R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom)
+                .addToBackStack(null)
+                .add(R.id.todoContent, caturdayFragment, Integer.toString(getFragmentCount()))
+                .commit();
+        mFloatingActionMenu.setVisibility(View.INVISIBLE);
+    }
+
+    /********************************************************************************************
+     *  Utility Methods
+     ********************************************************************************************/
 
     private void startProgressDialog() {
         mProgressDialog = new ProgressDialog(MainActivity.this);
@@ -273,6 +290,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void stopProgressDialog() {
         mProgressDialog.dismiss();
+    }
+
+    private int getFragmentCount() {
+        return getSupportFragmentManager().getBackStackEntryCount();
+    }
+
+    private Fragment getFragmentAt(int index) {
+        return getFragmentCount() > 0 ? getSupportFragmentManager().findFragmentByTag(Integer.toString(index)) : null;
+    }
+
+    private Fragment getCurrentFragment() {
+        return getFragmentAt(getFragmentCount() - 1);
     }
 
 }
