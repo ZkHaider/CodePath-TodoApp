@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.todocodepathapp.R;
 import com.todocodepathapp.adapters.CaturdayAdapter;
 import com.todocodepathapp.api.models.Image;
+import com.todocodepathapp.custom.ui.ZoomOutPageTransformer;
 
 import java.util.List;
 
@@ -40,6 +41,7 @@ public class CaturdayFragment extends Fragment {
         mCaturdayAdapter = new CaturdayAdapter(getActivity(), mFragmentManager);
         mCaturdayAdapter.setImages(mImages);
         mCatViewPager.setAdapter(mCaturdayAdapter);
+        mCatViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
 
         return root;
     }
