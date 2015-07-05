@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         mBus.register(this);
         mBus.post(new GetTodoItemsEvent());
+        showMenu();
     }
 
     @Override
@@ -109,8 +110,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if (mFloatingActionMenu.getVisibility() == View.INVISIBLE)
-            mFloatingActionMenu.setVisibility(View.VISIBLE);
+        showMenu();
     }
 
     /********************************************************************************************
@@ -254,13 +254,13 @@ public class MainActivity extends AppCompatActivity {
     private void replaceWithTodoListFragment(List<TodoItem> todoItems, FragmentTransaction ft) {
         mTodoListFragment = TodoListFragment.getTodoListFragment();
         mTodoListFragment.setTodoItems(todoItems);
-        ft.replace(R.id.todoContent, mTodoListFragment, Integer.toString(getFragmentCount()));
+        ft.replace(R.id.todoContent, mTodoListFragment);
         ft.commit();
     }
 
     private void replaceWithEmptyContentFragment(FragmentTransaction ft) {
         mEmptyContentFragment = EmptyContentFragment.getInstance();
-        ft.replace(R.id.todoContent, mEmptyContentFragment, Integer.toString(getFragmentCount()));
+        ft.replace(R.id.todoContent, mEmptyContentFragment);
         ft.commit();
     }
 
@@ -272,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
                 .setCustomAnimations(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom,
                         R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom)
                 .addToBackStack(null)
-                .add(R.id.todoContent, caturdayFragment, Integer.toString(getFragmentCount()))
+                .add(R.id.todoContent, caturdayFragment)
                 .commit();
         mFloatingActionMenu.setVisibility(View.INVISIBLE);
     }
@@ -292,16 +292,9 @@ public class MainActivity extends AppCompatActivity {
         mProgressDialog.dismiss();
     }
 
-    private int getFragmentCount() {
-        return getSupportFragmentManager().getBackStackEntryCount();
-    }
-
-    private Fragment getFragmentAt(int index) {
-        return getFragmentCount() > 0 ? getSupportFragmentManager().findFragmentByTag(Integer.toString(index)) : null;
-    }
-
-    private Fragment getCurrentFragment() {
-        return getFragmentAt(getFragmentCount() - 1);
+    private void showMenu() {
+        if (mFloatingActionMenu.getVisibility() == View.INVISIBLE)
+            mFloatingActionMenu.setVisibility(View.VISIBLE);
     }
 
 }
